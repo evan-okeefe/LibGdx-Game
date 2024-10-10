@@ -1,1 +1,2 @@
+dice.png
 libgdx.png
