@@ -13,34 +13,14 @@ import java.util.Random;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter implements InputProcessor {
+
     private SpriteBatch batch;
     private Texture gdxLogo;
-    private Texture dice;
 
     private float w, h;
 
     private Color background = new Color(0f, 0f, 0f, 1f);
 
-    private final Color[] colors = {
-            Color.BLACK,
-            new Color(148f, 0f, 0f, 1f),
-            new Color(148f, 148f, 0f, 1f),
-            new Color(0f, 148f, 0f, 1f),
-            new Color(0f, 148f, 148f, 1f),
-            new Color(0f, 0f, 148f, 1f),
-            new Color(148f, 148f, 148f, 1f),
-
-
-    };
-
-    private int currentColorIndex = 0;
-    private float transitionProgress = 0f;
-    private final float transitionDuration = 5f;
-
-    private float diceX = 0, diceY = 0;
-
-    private boolean gdxOnTop = false;
-    private boolean shake = true;
     private boolean paused = false;
 
     @Override
@@ -50,7 +30,6 @@ public class Main extends ApplicationAdapter implements InputProcessor {
         w = Gdx.graphics.getWidth();
         h = Gdx.graphics.getHeight();
         gdxLogo = new Texture("libgdx.png");
-        dice = new Texture("dice.png");
 
         Gdx.input.setInputProcessor(this);
     }
@@ -61,17 +40,10 @@ public class Main extends ApplicationAdapter implements InputProcessor {
         updateScreen();
 
         ScreenUtils.clear(background);
+
         batch.begin();
 
-        if (gdxOnTop){
-            batch.draw(dice, diceX, diceY);
-            batch.draw(gdxLogo, (w - gdxLogo.getWidth()) / 2, (h - gdxLogo.getHeight()) / 2);
-        }
-        else{
-            batch.draw(gdxLogo, (w - gdxLogo.getWidth()) / 2, (h - gdxLogo.getHeight()) / 2);
-            batch.draw(dice, diceX, diceY);
-        }
-
+        batch.draw(gdxLogo, (w - gdxLogo.getWidth()) / 2, (h - gdxLogo.getHeight()) / 2);
 
         batch.end();
     }
@@ -80,38 +52,12 @@ public class Main extends ApplicationAdapter implements InputProcessor {
     public void dispose() {
         batch.dispose();
         gdxLogo.dispose();
-        dice.dispose();
     }
 
     private void updateScreen(){
         if (paused){
             return;
         }
-        //Color in the background
-        int nextColorIndex = (currentColorIndex + 1) % colors.length;
-        transitionProgress += Gdx.graphics.getDeltaTime();
-        if (transitionProgress >= transitionDuration) {
-            transitionProgress = 0f;
-            currentColorIndex = nextColorIndex;
-        }
-        Color currentColor = colors[currentColorIndex];
-        Color nextColor = colors[nextColorIndex];
-        background = new Color(
-                currentColor.r + (nextColor.r - currentColor.r) * (transitionProgress / transitionDuration),
-                currentColor.g + (nextColor.g - currentColor.g) * (transitionProgress / transitionDuration),
-                currentColor.b + (nextColor.b - currentColor.b) * (transitionProgress / transitionDuration),
-                1f
-        );
-
-        if (!shake){
-            return;
-        }
-        //Dice Jitter
-        Random r = new Random();
-        float modX = -1f + (1f - (-1f)) * r.nextFloat();
-        float modY = -1f + (1f - (-1f)) * r.nextFloat();
-        diceX += modX;
-        diceY += modY;
     }
 
     @Override
@@ -119,27 +65,11 @@ public class Main extends ApplicationAdapter implements InputProcessor {
         if (keycode == Input.Keys.ESCAPE) {
             paused = !paused;
         }
-
-        if (paused){
-            return false;
-        }
-        else if (keycode == Input.Keys.DOWN){
-            gdxOnTop = false;
-        }
-        else if (keycode == Input.Keys.S){
-            shake = false;
-        } else if (keycode == Input.Keys.UP) {
-            gdxOnTop = true;
-        }
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if (keycode == Input.Keys.S){
-            shake = true;
-        }
-
         return false;
     }
 
