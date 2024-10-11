@@ -35,6 +35,10 @@ public class Player extends Obj implements InputProcessor{
         this.y += velocity.y * speed;
     }
 
+    public void collision(Obj col){
+    }
+
+    //INPUTS:
     @Override
     public boolean keyDown(int k) {
         keysPressed.add(k);

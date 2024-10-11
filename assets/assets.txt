@@ -1,2 +1,6 @@
+laser-1.png
+laser-2.png
+lose.png
 libgdx.png
+boulder.png
 player.png
