@@ -62,7 +62,7 @@ public class Laser extends Obj {
 
         randomEdge();
 
-        currentFakeLaser = new FakeLaser(w, h, "laser-1.png", 4, edge, this, x, y, dir);
+        currentFakeLaser = new FakeLaser(w, h, "laser-1.png", 10, edge, this, x, y, dir);
 
         Main.renderAdd.add(currentFakeLaser);
     }
@@ -99,7 +99,7 @@ public class Laser extends Obj {
 
         Main.renderRemove.add(currentFakeLaser);
 
-        currentFakeLaser = new FakeLaser(w, h, "laser-1.png", 4, edge, this, x, y, dir);
+        currentFakeLaser = new FakeLaser(w, h, "laser-1.png", 10, edge, this, x, y, dir);
 
         Main.renderAdd.add(currentFakeLaser);
     }

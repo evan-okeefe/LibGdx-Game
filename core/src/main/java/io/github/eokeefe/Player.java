@@ -2,6 +2,7 @@ package io.github.eokeefe;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntSet;
 
@@ -37,6 +38,7 @@ public class Player extends Obj implements InputProcessor{
 
     public void collision(Obj col){
     }
+
 
     //INPUTS:
     @Override

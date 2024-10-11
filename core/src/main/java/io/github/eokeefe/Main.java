@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.Timer;
 import io.github.eokeefe.laser.Laser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +77,9 @@ public class Main extends ApplicationAdapter implements InputProcessor {
         batch.begin();
 
         for (Obj obj : renderItems) {
+
             batch.draw(obj, obj.x, obj.y);
+
         }
 
         batch.end();
@@ -130,6 +130,20 @@ public class Main extends ApplicationAdapter implements InputProcessor {
 
     }
 
+    private void addBoulder(){
+        Boulder b = new Boulder(w, h, "boulder.png");
+
+        boulders.add(b);
+        renderAdd.add(b);
+    }
+
+    private void addLaser(){
+        Laser l = new Laser(w, h, "laser-2.png", 40);
+
+        lasers.add(l);
+        renderAdd.add(l);
+    }
+
     //INPUTS:
     @Override
     public boolean keyDown(int k) {
@@ -153,20 +167,6 @@ public class Main extends ApplicationAdapter implements InputProcessor {
 
         }
         return false;
-    }
-
-    private void addBoulder(){
-        Boulder b = new Boulder(w, h, "boulder.png", 2);
-
-        boulders.add(b);
-        renderAdd.add(b);
-    }
-
-    private void addLaser(){
-        Laser l = new Laser(w, h, "laser-2.png", 20);
-
-        lasers.add(l);
-        renderAdd.add(l);
     }
 
     @Override

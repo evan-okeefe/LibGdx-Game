@@ -12,9 +12,9 @@ public class Boulder extends Obj{
     int edge;
     Random r = new Random();
 
-    public Boulder(float _w, float _h, String _path, float _speed){
+    public Boulder(float _w, float _h, String _path){
         super(_path);
-        speed = _speed;
+        speed =  1 + r.nextFloat() * (3 - 1);
         w = _w;
         h = _h;
 
@@ -56,6 +56,8 @@ public class Boulder extends Obj{
 
     public void reset() {
         edge = r.nextInt(4);
+
+        speed =  1 + r.nextFloat() * (3 - 1);
 
         randomEdge();
     }
